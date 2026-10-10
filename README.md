@@ -1,6 +1,3 @@
-
-
-[HamTech-IC7100-Windows11-Fixed-v0.6.2.zip](https://github.com/user-attachments/files/33289958/HamTech-IC7100-Windows11-Fixed-v0.6.2.zip)
 # HamTech M0FXB Modification — Windows 11 IC-7100 Panel
 
 Complete Windows edition v0.6.2 for a Windows 11 **Intel/AMD 64-bit PC** and Icom IC-7100. Includes the IC-705 source photograph, live control panel, Windows connection chooser, installers and GitHub-ready source. No previous version or Raspberry Pi is required.

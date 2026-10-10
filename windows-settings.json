@@ -1,0 +1,6 @@
+{
+  "port": "COM24",
+  "audio_device": "auto",
+  "baud": 19200,
+  "address": "88"
+}

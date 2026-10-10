@@ -1,16 +1,29 @@
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
+Start-Transcript -Path (Join-Path $PSScriptRoot 'install-log.txt') -Force | Out-Null
 Write-Host 'HamTech M0FXB Modification - Windows 11 setup' -ForegroundColor Cyan
 function Find-Python {
-    $paths = @("$env:LOCALAPPDATA\Programs\Python\Python313\python.exe", "$env:ProgramFiles\Python313\python.exe")
-    foreach ($path in $paths) { if (Test-Path $path) { return $path } }
+    foreach ($version in @('313','312','314')) {
+        foreach ($base in @("$env:LOCALAPPDATA\Programs\Python", "$env:ProgramFiles")) {
+            $candidate = Join-Path $base "Python$version\python.exe"
+            if (Test-Path $candidate) { return $candidate }
+        }
+    }
     $py = Get-Command py.exe -ErrorAction SilentlyContinue
     if ($py) {
-        $output = & $py.Source -3.13 -c 'import sys; print(sys.executable)' 2>$null
-        if ($LASTEXITCODE -eq 0 -and $output) { return ($output | Select-Object -Last 1) }
+        foreach ($version in @('3.13','3.12','3.14')) {
+            try {
+                $output = & $py.Source "-$version" -c 'import sys; print(sys.executable)' 2>$null
+                if ($LASTEXITCODE -eq 0 -and $output) {
+                    $candidate = ($output | Select-Object -Last 1).Trim()
+                    if (Test-Path $candidate) { return $candidate }
+                }
+            } catch { }
+        }
     }
     return $null
 }
+
 try {
     $pythonExe = Find-Python
     if (-not $pythonExe) {
@@ -40,5 +53,8 @@ try {
     Write-Host 'Ready. Install the Icom USB driver if needed, then open START-PANEL.cmd.' -ForegroundColor Green
 } catch {
     Write-Host $_.Exception.Message -ForegroundColor Red
+    Stop-Transcript | Out-Null
     exit 1
 }
+Stop-Transcript | Out-Null
+

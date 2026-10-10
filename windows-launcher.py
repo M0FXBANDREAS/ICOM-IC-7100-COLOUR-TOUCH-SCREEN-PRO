@@ -11,9 +11,21 @@ from tkinter import ttk, messagebox
 import urllib.request
 import webbrowser
 from serial.tools import list_ports
-import sounddevice as sd
+try:
+    import sounddevice as sd
+    audio_import_error=''
+except Exception as exc:
+    sd=None
+    audio_import_error=str(exc)
 
 ROOT=Path(__file__).resolve().parent
+def report_error(kind, value, trace):
+    import traceback
+    details=''.join(traceback.format_exception(kind,value,trace))
+    (ROOT/'launcher-error.txt').write_text(details,encoding='utf-8')
+    try: messagebox.showerror('Panel startup failed',str(value)+'\n\nDetails saved in launcher-error.txt')
+    except Exception: print(details)
+sys.excepthook=report_error
 CONFIG=ROOT/'windows-settings.json'
 URL='http://127.0.0.1:7100'
 try: saved=json.loads(CONFIG.read_text())
@@ -22,6 +34,7 @@ app=tk.Tk()
 app.title('HamTech M0FXB Modification — IC-7100')
 app.geometry('740x480');app.minsize(640,440)
 app.configure(bg='#10141b')
+app.report_callback_exception=report_error
 style=ttk.Style();style.theme_use('clam')
 style.configure('TFrame',background='#10141b')
 style.configure('TLabel',background='#10141b',foreground='#e1eaff',font=('Segoe UI',11))
@@ -50,6 +63,7 @@ def refresh():
     for p in list_ports.comports():
         ports[f'{p.device} — {p.description} — {p.serial_number or ""}']=p.device
     try:
+        if sd is None: raise RuntimeError(audio_import_error)
         for i,d in enumerate(sd.query_devices()):
             if d['max_input_channels']>0:
                 host=sd.query_hostapis(d['hostapi'])['name']
@@ -76,7 +90,7 @@ def start():
             webbrowser.open(URL);return
     except Exception: pass
     try:
-        process=subprocess.Popen([sys.executable,str(ROOT/'server.py'),'--port',config['port'],'--audio-device',config['audio_device'],'--baud',str(config['baud']),'--address',config['address']],cwd=ROOT,creationflags=subprocess.CREATE_NEW_CONSOLE)
+        process=subprocess.Popen([sys.executable,str(ROOT/'windows-server.py'),'--port',config['port'],'--audio-device',config['audio_device'],'--baud',str(config['baud']),'--address',config['address']],cwd=ROOT,creationflags=subprocess.CREATE_NEW_CONSOLE)
     except Exception as exc: return messagebox.showerror('Could not start',str(exc))
     start_button.configure(state='disabled');status.set('Starting panel. Keep the new server console open.')
     def wait_ready():

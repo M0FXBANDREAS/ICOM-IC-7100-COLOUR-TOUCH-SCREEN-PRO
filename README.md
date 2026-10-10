@@ -1,6 +1,6 @@
 # HamTech M0FXB Modification — Windows 11 IC-7100 Panel
 
-Complete Windows edition v0.6.1 for a Windows 11 **Intel/AMD 64-bit PC** and Icom IC-7100. Includes the IC-705 source photograph, live control panel, Windows connection chooser, installers and GitHub-ready source. No previous version or Raspberry Pi is required.
+Complete Windows edition v0.6.2 for a Windows 11 **Intel/AMD 64-bit PC** and Icom IC-7100. Includes the IC-705 source photograph, live control panel, Windows connection chooser, installers and GitHub-ready source. No previous version or Raspberry Pi is required.
 
 ## Easy installation
 
@@ -84,4 +84,8 @@ The image below is the bundled source photo, **not a runtime screenshot**:
 
 ## Status
 
-Windows support and the installer/chooser are implemented but **have not been run on Windows or tested with the radio**, following the existing no-testing instruction. This is a source-based installer package, not a compiled standalone EXE. Windows runtime, audio-device compatibility and new CI-V features await hardware confirmation.
+Python compilation, JavaScript syntax, Linux-host server HTTP smoke checks and mocked CI-V meter decoding passed. **The Windows installer/chooser and radio hardware have not been tested on Windows.** This is a source-based installer package, not a compiled standalone EXE. Windows runtime, audio-device compatibility and new CI-V features await hardware confirmation.
+
+## v0.6.2 startup fixes
+
+Python detection now checks installed 3.12/3.13/3.14 runtimes and tolerates missing launcher versions. Setup saves `install-log.txt`. Server errors stay visible and save to `server-error.txt`. Launcher callback errors save to `launcher-error.txt`. Double-click `DIAGNOSE.cmd` to list dependencies and devices into `diagnostics.txt` without probing the radio.

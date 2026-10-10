@@ -1,0 +1,53 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261010195528
+Username: DESKTOP-8KSRVEV\User
+RunAs User: DESKTOP-8KSRVEV\User
+Configuration Name: 
+Machine: DESKTOP-8KSRVEV (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\DESKTOP\FINAL71002\ic7100-panel\install-windows.ps1
+Process ID: 22044
+PSVersion: 5.1.26100.9549
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9549
+BuildVersion: 10.0.26100.9549
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+HamTech M0FXB Modification - Windows 11 setup
+
+Requirement already satisfied: pip in .\.venv\Lib\site-packages (26.1.1)
+Collecting pip
+  Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 17.2 MB/s  0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 26.1.1
+    Uninstalling pip-26.1.1:
+      Successfully uninstalled pip-26.1.1
+Successfully installed pip-26.2.1
+Collecting numpy<3,>=1.24 (from -r requirements.txt (line 2))
+  Downloading numpy-2.5.3-cp314-cp314-win_amd64.whl.metadata (6.6 kB)
+Collecting sounddevice<1,>=0.4 (from -r requirements.txt (line 3))
+  Downloading sounddevice-0.5.6-py3-none-win_amd64.whl.metadata (1.4 kB)
+Collecting cffi (from sounddevice<1,>=0.4->-r requirements.txt (line 3))
+  Downloading cffi-2.1.1-cp314-cp314-win_amd64.whl.metadata (2.6 kB)
+Collecting pycparser (from cffi->sounddevice<1,>=0.4->-r requirements.txt (line 3))
+  Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+Downloading pyserial-3.5-py2.py3-none-any.whl (90 kB)
+Downloading numpy-2.5.3-cp314-cp314-win_amd64.whl (12.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 34.7 MB/s  0:00:00
+Downloading sounddevice-0.5.6-py3-none-win_amd64.whl (1.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 25.2 MB/s  0:00:00
+Downloading cffi-2.1.1-cp314-cp314-win_amd64.whl (187 kB)
+Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+Installing collected packages: pyserial, pycparser, numpy, cffi, sounddevice
+Successfully installed cffi-2.1.1 numpy-2.5.3 pycparser-3.11 pyserial-3.5 sounddevice-0.5.6
+Ready. Install the Icom USB driver if needed, then open START-PANEL.cmd.
+**********************
+Windows PowerShell transcript end
+End time: 20261010195606
+**********************
